@@ -1,1 +1,130 @@
+/* 
+  Animation Performance Optimization
+  Optimasi animasi untuk mencegah lag dan meningkatkan performa
+*/
 
+/* 1. Hardware Acceleration untuk animasi yang sering digunakan */
+.hardware-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Force hardware acceleration */
+  backface-visibility: hidden;
+}
+
+/* 2. Optimized hover animations - gunakan transform dan opacity saja */
+.optimized-hover {
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  will-change: transform, opacity;
+}
+
+.optimized-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* 3. Reduced motion untuk accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 4. Optimized loading animations */
+.optimized-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #8b5cf6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  will-change: transform;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 5. Optimized fade animations */
+.fade-in-optimized {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 6. Optimized pulse animation dengan contain */
+.pulse-optimized {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  contain: layout style paint;
+  will-change: opacity;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* 7. Optimized bounce animation */
+.bounce-optimized {
+  animation: bounce 1s ease-in-out infinite;
+  contain: layout style paint;
+  will-change: transform;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* 8. Container queries untuk responsive animations */
+@container (max-width: 768px) {
+  .mobile-reduced-animation {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* 9. Optimized gradient animations */
+.gradient-optimized {
+  background: linear-gradient(45deg, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  contain: paint;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 10. Performance-focused card hover */
+.card-hover-optimized {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.card-hover-optimized:hover {
+  transform: translateY(-4px) scale(1.02);
+}
